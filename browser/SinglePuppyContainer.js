@@ -3,9 +3,10 @@
 
 // const mapStateToProps = state =>{
 //     return {
-//         puppy: state.singlePuppy
+//         puppy: state.selectedPuppy
 //     }
 // }
+
 
 // const SinglePuppyContainer = connect(mapStateToProps)(SinglePuppy);
 // export default SinglePuppyContainer;

@@ -1,11 +1,6 @@
 import { combineReducers } from 'redux';
 import { RECEIVE_PUPPIES, SELECT_PUPPY } from './action-creators';
 
-// const initialState = {
-//     allPuppies : [],
-//     singlePuppy: {}
-// }
-
 function allPuppiesReducer (state = [], action) {
   switch (action.type) {
     case RECEIVE_PUPPIES: 

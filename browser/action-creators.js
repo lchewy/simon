@@ -3,11 +3,6 @@ import axios from 'axios';
 export const RECEIVE_PUPPIES = "RECEIVE_PUPPIES";
 export const SELECT_PUPPY = "SELECT_PUPPY";
 
-const hardcodedPuppy = {
-  id: 1,
-  name: 'Taylor',
-  image: 'https://designerdoginfo.files.wordpress.com/2013/01/puggle-puppy-4.jpg?w=584'
-};
 
 export const receivePuppies = function (puppies){
     return {
