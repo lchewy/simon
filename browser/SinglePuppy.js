@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class SinglePuppy extends Component {
 
+class SinglePuppy extends Component {
+  
   render () {
+    console.log('AFDASDFA ',this.props.puppy)
     return (
       <div>
-        <h2>PUPPY NAME GOES HERE</h2>
+        <h2>{this.props.puppy.name}</h2>
         <div>
-          <img src="http://placehold.it/400x400" />
+          <img src={this.props.puppy.image} />
         </div>
       </div>
     )
   }
 }
+
+const mapStateToProps = state =>{
+    return {
+        puppy: state.selectedPuppy
+    }
+}
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+
+//   }
+// }
+
+const SinglePuppyContainer = connect(mapStateToProps)(SinglePuppy);
+export default SinglePuppyContainer;
