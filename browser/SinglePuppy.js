@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPuppy } from './action-creators';
+import { fetchPuppy, deletePuppy } from './action-creators';
 import store from './store'
 
 
@@ -9,7 +9,10 @@ class SinglePuppy extends Component {
 
   componentDidMount(){
     store.dispatch(fetchPuppy(this.props.match.params.id))
-    
+  }
+
+  componentWillUnmount(){
+    store.dispatch(deletePuppy());
   }
   
   render () {

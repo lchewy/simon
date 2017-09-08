@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { fetchPuppies} from './action-creators';
 import { Link } from 'react-router-dom';
 
-class AllPuppies extends Component {
+export default class AllPuppies extends Component {
 
   componentDidMount(){
     this.props.loadAllPuppies()
   }
     render(){
+      console.log(this.props)
       return (
         <div>
           <ul className="list-unstyled">
@@ -29,21 +30,21 @@ class AllPuppies extends Component {
   
 }
 
-const mapStateToProps = (state) =>{
-  return {
-    puppies: state.allPuppies
-  }
-}
+// const mapStateToProps = (state) =>{
+//   return {
+//     puppies: state.allPuppies
+//   }
+// }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadAllPuppies: function(){
-      dispatch(fetchPuppies())
-    }
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     loadAllPuppies: function(){
+//       dispatch(fetchPuppies())
+//     }
     
-  }
-}
+//   }
+// }
 
-const AllPuppiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllPuppies); 
+// const AllPuppiesContainer = connect(mapStateToProps, mapDispatchToProps)(AllPuppies); 
 
-export default AllPuppiesContainer;
+// export default AllPuppiesContainer;

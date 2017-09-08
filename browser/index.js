@@ -2,7 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AllPuppiesContainer from './AllPuppies';
+// import AllPuppiesContainer from './AllPuppies';
+import AllPuppiesContainer from './AllPuppiesContainer'
 import {Provider} from 'react-redux';
 import store from './store';
 import {HashRouter as Router, Route, Switch} from 'react-router-dom';

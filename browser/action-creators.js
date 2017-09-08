@@ -2,6 +2,13 @@ import axios from 'axios';
 
 export const RECEIVE_PUPPIES = "RECEIVE_PUPPIES";
 export const SELECT_PUPPY = "SELECT_PUPPY";
+export const DELETE_PUPPY = "DELETE_PUPPY";
+
+export const deletePuppy = puppy => {
+    return {
+        type: DELETE_PUPPY,
+    }
+}
 
 
 export const receivePuppies = function (puppies){
