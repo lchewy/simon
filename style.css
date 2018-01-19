@@ -1,0 +1,299 @@
+body {
+  background: #e7d5b9;
+}
+
+.container {
+  height: 800px;
+  width: 800px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.frame {
+  position: absolute;
+  height: 600px;
+  width: 600px;
+  background: #333333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  border: 30px solid #333333;
+  box-shadow: 0 0 10px #000000;
+}
+
+#blue, .fb {
+  height: 300px;
+  width: 300px;
+  background: #1c4a8a;
+  position: absolute;
+  border-right: 30px solid red;
+  z-index: 1;
+}
+
+.fb{
+  animation: flash-blue linear 1s;
+}
+
+@keyframes flash-blue{
+  0%, 100%{background: #6CD7F6}
+}
+
+#yellow, .fy {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  left: 50%;
+  background: #c7a739;
+  z-index: 1;
+}
+
+.fy{
+  animation: flash-yellow linear 1s;
+}
+
+@keyframes flash-yellow{
+  0%,100%{background: #EBED85}
+}
+
+#red, .fr {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  top: 50%;
+  background: #922220;
+  z-index: 1;
+}
+
+.fr{
+  animation: flash-red linear 1s;
+}
+
+@keyframes flash-red{
+  0%, 100%{background: #E34954;}
+}
+
+#green, .fg {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  left: 50%;
+  top: 50%;
+  background: #4aa354;
+  z-index: 1;
+}
+
+.fg{
+  animation: flash-green linear 1s;
+}
+
+@keyframes flash-green{
+  0%, 100%{background: #7ED694;}
+}
+
+.ns {
+  width: 60px;
+  height: 100%;
+  background: #333333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.ew {
+  position: absolute;
+  height: 60px;
+  width: 100%;
+  background: #333333;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.face {
+  position: absolute;
+  height: 350px;
+  width: 350px;
+  background: #ebe7ee;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 20px solid #333333;
+  overflow: hidden;
+}
+
+#blue,
+#yellow,
+#green,
+#red {
+  cursor: pointer;
+}
+
+.brand {
+  position: absolute;
+  height: 310px;
+  width: 310px;
+  background: black;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.name {
+  color: #222222;
+  position: relative;
+  text-align: center;
+  font-size: 80px;
+  top: 50px;
+  left: -10px;
+  font-family: "Alfa Slab One", cursive;
+}
+
+.control,
+.power,
+.reg {
+  position: absolute;
+}
+
+.count,
+.start,
+.strict {
+  position: absolute;
+  display: inline-block;
+}
+
+.count {
+  width: 100px;
+  height: 60px;
+  background: #2e080d;
+  left: 20px;
+  border-radius: 10px;
+  border: 2px solid #222222;
+  top: 30px;
+}
+
+.start,
+.strict {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  background: #e93224;
+  border-radius: 50%;
+  border: 6px solid #444444;
+  box-shadow: 4px 4px 15px -2px #000000;
+  top: 35px;
+}
+
+.start {
+  left: 150px;
+  cursor: pointer;
+}
+
+.strict {
+  left: 250px;
+  background: #fffd54;
+  cursor: pointer;
+}
+
+.strict-btn, .strict-light{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background: #2E080D;
+  top: 9px;
+  left: 263px;
+  border-radius: 50%;
+  border: 3px solid #444444;
+}
+
+.strict-light{
+  background: #E34954;
+}
+
+.control {
+  display: inline-block;
+}
+
+.power {
+  width: 75px;
+  height: 40px;
+  position: absolute;
+  background: #111111;
+  left: 135px;
+  border-radius: 5px;
+  top: 270px;
+}
+
+.switch, .switch-on {
+  position: relative;
+  height: 30px;
+  width: 30px;
+  background: #4a92d8;
+  border-radius: 10px;
+  border: 4px solid #222222;
+  cursor: pointer;
+}
+
+.switch-on{
+  left: 36px;
+}
+
+.reg {
+  font-weight: bold;
+  font-size: 20px;
+  position: relative;
+  left: 300px;
+  top: -40px;
+}
+
+.fline {
+  display: inline-block;
+  position: relative;
+  top: 85px;
+  margin-left: 50px;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: bold;
+}
+
+.one {
+  left: 8px;
+}
+
+.two {
+  left: 25px;
+}
+
+.three {
+  left: 45px;
+}
+
+.four,
+.five {
+  position: relative;
+  font-family: "Open Sans Condensed", sans-serif;
+  font-weight: bold;
+  display: inline-block;
+  top: 130px;
+  left: 110px;
+}
+
+.five {
+  left: 195px;
+}
+.num{
+  color: #CB2E33;
+  position: relative;
+  top: -32px;
+  left: 12px;
+  font-size: 45px;
+  font-family: 'Orbitron', sans-serif;
+}
