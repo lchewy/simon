@@ -35,12 +35,12 @@ class Simon extends Component {
     }
   }
 
-  start() {
+  async start() {
     if (this.state.on) {
       // const color = randColor();
       // this.setState({pattern: [...this.state.pattern, color]  })
       this.setState({ start: !this.state.start});
-      this.sequence();
+     await this.sequence();
     }
   }
 
@@ -75,28 +75,68 @@ class Simon extends Component {
         sound: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
       });
     const response = await this.refs.audio.play();
-    const stopFlash = setTimeout(
+    const stopFlash = await setTimeout(
       () => this.setState({ flash: "", sound: "" }),
       1000
     );
   }
 
-  sequence() {
-    let test = ["blue","green","red","yellow","blue","blue"];
+  async sequence() {
+    let test = ["blue","blue","blue", "blue", "green","red","yellow","blue","blue", "blue"];
     let count = 0;
-    const loop = ()=>{
+// "green","red","yellow","blue","blue", "blue"
+     const loop = () =>{ 
       if(count<test.length){
-        process();
+        process();  
       }
     }
+
+    const reset = () =>{
+      // console.log("wtf where are you??? ",this.state.flash)
+      this.setState({flash:"", sound:""});
+    }
     
-    const process = () =>{
-      
-      console.log(test[count]);
+     const process = () =>{
+
+      this.setState({flash:""})
+      console.log('in process', this.state.flash)
+      if(test[count] === "blue"){
+         this.setState({
+          flash: "fb",
+          sound: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
+        })
+      }
+
+      if(test[count] === "yellow"){
+        this.setState({
+          flash: "fy",
+          sound: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"
+        })
+      }
+
+      if(test[count] === "red"){
+        this.setState({
+          flash: "fr",
+          sound: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"
+        })
+      }
+
+      if(test[count] === "green"){
+        this.setState({
+          flash: "fg",
+          sound: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
+        })
+      }   
+      this.refs.audio.play();
       count++;
       setTimeout(loop, 1000);
     }
-    process()
+
+    // await reset();
+    // await process();
+    await setTimeout(reset, 1000);
+
+    await process();
   }
 
   render() {
