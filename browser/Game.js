@@ -1,7 +1,7 @@
 import React from 'react';
 import countDisplay from "./CountDisplay";
 
-const game = (props, on, start, strict, flash) => {
+const game = (props, on, start, strict, player) => {
   return (
     <div className="container">
       <audio src={props.sound} type="audio/mpeg" ref="audio" />
@@ -11,28 +11,28 @@ const game = (props, on, start, strict, flash) => {
           className={
             props.flash === "fb" && props.on && props.start ? props.flash : ""
           }
-          onClick={flash}
+          onClick={player}
         />
         <div
           id="yellow"
           className={
             props.flash === "fy" && props.on && props.start ? props.flash : ""
           }
-          onClick={flash}
+          onClick={player}
         />
         <div
           id="red"
           className={
             props.flash === "fr" && props.on && props.start ? props.flash : ""
           }
-          onClick={flash}
+          onClick={player}
         />
         <div
           id="green"
           className={
             props.flash === "fg" && props.on && props.start ? props.flash : ""
           }
-          onClick={flash}
+          onClick={player}
         />
         <div className="ns" />
         <div className="ew" />

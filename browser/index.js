@@ -17,9 +17,12 @@ class Simon extends Component {
     };
     this.on = this.on.bind(this);
     this.start = this.start.bind(this);
+    this.startPattern = this.startPattern.bind(this);
     this.sequence = this.sequence.bind(this);
     this.isStrict = this.isStrict.bind(this);
     this.flash = this.flash.bind(this);
+    this.clear = this.clear.bind(this);
+    this.playerMove = this.playerMove.bind(this);
   }
 
   on() {
@@ -30,18 +33,30 @@ class Simon extends Component {
         strict: false,
         pattern: [],
         flash: "",
-        sound: ""
+        sound: "",
+        player: [],
       });
     }
   }
 
-  async start() {
+  clear(){
+    this.setState({
+        start: true,
+        strict: false,
+        pattern: [],
+        flash: "",
+        sound: "",
+        player: [],
+    })
+  }
+
+   start() {
     if (this.state.on) {
-      // const color = randColor();
-      // this.setState({pattern: [...this.state.pattern, color]  })
-      this.setState({ start: !this.state.start});
-     await this.sequence();
+      this.setState({start: !this.state.start})
+      this.startPattern();
     }
+    // else if(this.state.on && !this.state.start) this.clear();
+
   }
 
   isStrict() {
@@ -51,25 +66,26 @@ class Simon extends Component {
     }
   }
 
-  async flash(evt) {
-    const id = evt.target.id;
+  async flash(color) {
+    // const id =  evt //|| evt.target.id;
+
     const { start, on } = this.state;
-    if (id === "blue" && start && on)
+    if (color === "blue" && start && on)
       await this.setState({
         flash: "fb",
         sound: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
       });
-    if (id === "yellow" && start && on)
+    if (color === "yellow" && start && on)
       await this.setState({
         flash: "fy",
         sound: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"
       });
-    if (id === "red" && start && on)
+    if (color === "red" && start && on)
       await this.setState({
         flash: "fr",
         sound: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"
       });
-    if (id === "green" && start && on)
+    if (color === "green" && start && on)
       await this.setState({
         flash: "fg",
         sound: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
@@ -77,72 +93,45 @@ class Simon extends Component {
     const response = await this.refs.audio.play();
     const stopFlash = await setTimeout(
       () => this.setState({ flash: "", sound: "" }),
-      1000
+      400
     );
   }
 
   async sequence() {
-    let test = ["blue","blue","blue", "blue", "green","red","yellow","blue","blue", "blue"];
-    let count = 0;
-// "green","red","yellow","blue","blue", "blue"
-     const loop = () =>{ 
-      if(count<test.length){
-        process();  
+    const self = this;
+    let i = 0;
+    let pattern = await setInterval(()=>{
+        if(self.state.start){
+          self.flash(self.state.pattern[i]);
+          i++;
+          if(i>=self.state.pattern.length){
+            clearInterval(pattern);
+          }
       }
-    }
+    }, 1000)
+    this.setState({player:[]});  
+  }
 
-    const reset = () =>{
-      // console.log("wtf where are you??? ",this.state.flash)
-      this.setState({flash:"", sound:""});
-    }
-    
-     const process = () =>{
+  startPattern(){
+    let color = randColor();
+    this.setState({pattern:[...this.state.pattern, color]});
+    // console.log(this.state.pattern)
+    this.sequence();
+  }
 
-      this.setState({flash:""})
-      console.log('in process', this.state.flash)
-      if(test[count] === "blue"){
-         this.setState({
-          flash: "fb",
-          sound: "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"
-        })
-      }
-
-      if(test[count] === "yellow"){
-        this.setState({
-          flash: "fy",
-          sound: "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"
-        })
-      }
-
-      if(test[count] === "red"){
-        this.setState({
-          flash: "fr",
-          sound: "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"
-        })
-      }
-
-      if(test[count] === "green"){
-        this.setState({
-          flash: "fg",
-          sound: "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"
-        })
-      }   
-      this.refs.audio.play();
-      count++;
-      setTimeout(loop, 1000);
-    }
-
-    // await reset();
-    // await process();
-    await setTimeout(reset, 1000);
-
-    await process();
+  playerMove(evt){
+    console.log(evt.target.id)
+    const move = evt.target.id;
+    this.flash(move);
+    this.setState({player: [...this.state.player, move]});
+    console.log('player move', this.state.player)
+    console.log('pattern ', this.state.pattern)
   }
 
   render() {
     return (
       <div>
-        {game(this.state, this.on, this.start, this.isStrict, this.flash)}
+        {game(this.state, this.on, this.start, this.isStrict, this.playerMove)}
       </div>
     );
   }
