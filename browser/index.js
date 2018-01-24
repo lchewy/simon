@@ -13,7 +13,8 @@ class Simon extends Component {
       start: false,
       pattern: [],
       strict: false,
-      sound: ""
+      sound: "",
+      wrong: false,
     };
     this.on = this.on.bind(this);
     this.start = this.start.bind(this);
@@ -23,6 +24,7 @@ class Simon extends Component {
     this.flash = this.flash.bind(this);
     this.clear = this.clear.bind(this);
     this.playerMove = this.playerMove.bind(this);
+    this.checkMove = this.checkMove.bind(this);
   }
 
   on() {
@@ -35,25 +37,31 @@ class Simon extends Component {
         flash: "",
         sound: "",
         player: [],
+        wrong: false,
+        win: false,
       });
     }
   }
 
   clear(){
     this.setState({
-        start: true,
+        start: false,
         strict: false,
         pattern: [],
         flash: "",
         sound: "",
         player: [],
+        wrong: false,
+        win: false,
     })
   }
 
-   start() {
+   async start() {
     if (this.state.on) {
-      this.setState({start: !this.state.start})
-      this.startPattern();
+      await this.setState({start: !this.state.start})
+      console.log('start ', this.state.start)
+      if(this.state.start) this.startPattern();
+      else this.clear();
     }
     // else if(this.state.on && !this.state.start) this.clear();
 
@@ -67,7 +75,6 @@ class Simon extends Component {
   }
 
   async flash(color) {
-    // const id =  evt //|| evt.target.id;
 
     const { start, on } = this.state;
     if (color === "blue" && start && on)
@@ -119,13 +126,37 @@ class Simon extends Component {
     this.sequence();
   }
 
-  playerMove(evt){
-    console.log(evt.target.id)
+  async playerMove(evt){
+    // console.log(evt.target.id)
     const move = evt.target.id;
     this.flash(move);
-    this.setState({player: [...this.state.player, move]});
-    console.log('player move', this.state.player)
-    console.log('pattern ', this.state.pattern)
+    await this.setState({player: [...this.state.player, move]});
+    await this.checkMove(move);
+    // console.log('player move', this.state.player)
+    // console.log('pattern ', this.state.pattern)
+  }
+
+  checkMove(move){
+    const {player, pattern, strict, wrong, win} = this.state;
+    const self = this;
+    if(player[player.length-1] !== pattern[player.length-1]){
+      if(strict && !wrong){
+        this.setState({wrong: true});
+        let restart = setTimeout(()=>{self.clear()},1000)
+      }else{
+        this.sequence();
+      }
+    }else{
+      if(pattern.length === player.length){
+        if(pattern.length === 19){
+          this.setState({win: true});
+          let restart = setTimeout(()=>self.clear(), 1000);
+        }else{
+          this.startPattern();
+          
+        }
+      }
+    }
   }
 
   render() {

@@ -41,7 +41,7 @@ const game = (props, on, start, strict, player) => {
           <div className="reg">&reg;</div>
           <div className="control">
             <div className="count">
-              <p className="num">{countDisplay(props)}</p>
+              <p className="num">{props.win? "\xa0!\xa0!" : props.wrong ? "\xa0XX":countDisplay(props)}</p>
             </div>
             <p className="fline one">COUNT</p>
             <div className="start" onClick={start} />
